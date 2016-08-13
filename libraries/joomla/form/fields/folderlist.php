@@ -186,7 +186,7 @@ class JFormFieldFolderList extends JFormFieldList
 
 		if (!is_dir($path))
 		{
-			$path = JPATH_ROOT . '/' . $path;
+			$path = str_replace(['\\','/'], DS, JPATH_ROOT . DS . $path);
 		}
 
 		// Prepend some default options based on field attributes.
@@ -218,7 +218,7 @@ class JFormFieldFolderList extends JFormFieldList
 				}
 
 				// Remove the root part and the leading /
-				$folder = trim(str_replace($path, '', $folder), '/');
+				$folder = trim(str_replace($path, '', str_replace(['\\','/'], DS, $folder)), DS);
 
 				$options[] = JHtml::_('select.option', $folder, $folder);
 			}
